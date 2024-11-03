@@ -78,6 +78,12 @@ const ChatBox = () => {
     // Clear the input field
     setInput("");
   };
+  const handleKeyDown = (e) => {
+    if (e.key === "Enter") {
+      sendMessage();
+    }
+  };
+
 
   const sendImage = async (e) => {
     try {
@@ -198,6 +204,7 @@ const ChatBox = () => {
         <input
           value={input}
           onChange={(e) => setInput(e.target.value)}
+          onKeyDown={handleKeyDown}
           type="text"
           placeholder="Send a Message"
         />
