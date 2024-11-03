@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from "react";
 import { Routes, Route, useNavigate } from "react-router-dom";
-import Login from "./pages/Login/login";
+import Login from "./pages/Login/Login";
 import Chats from "./pages/chats/Chats";
 import ProfileUpdate from "./pages/ProfileUpdate/profilupdate";
 import { ToastContainer, toast } from "react-toastify";
