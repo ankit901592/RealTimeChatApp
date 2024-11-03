@@ -5,15 +5,21 @@
   display: flex;
   align-items: center;
   justify-content: center;
+  padding: 20px;
 }
+
 .profile-container {
   background: white;
   display: flex;
   align-items: center;
   justify-content: space-between;
   min-width: 700px;
+  max-width: 90%;
   border-radius: 10px;
+  flex-direction: row;
+  padding: 20px;
 }
+
 .profile-pic {
   max-width: 160px;
   aspect-ratio: 1/1;
@@ -27,9 +33,11 @@
   gap: 20px;
   padding: 40px;
 }
+
 .profile form h3 {
   font-weight: 500;
 }
+
 .profile label {
   display: flex;
   align-items: center;
@@ -37,11 +45,13 @@
   color: gray;
   cursor: pointer;
 }
+
 .profile label img {
   width: 50px;
   aspect-ratio: 1/1;
   border-radius: 50%;
 }
+
 .profile input,
 textarea {
   padding: 10px;
@@ -49,6 +59,7 @@ textarea {
   border: 1px solid #c9c9c9;
   outline-color: #077eff;
 }
+
 .profile form button {
   border: none;
   color: white;
@@ -56,4 +67,45 @@ textarea {
   padding: 8px;
   font-size: 16px;
   cursor: pointer;
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .profile-container {
+    flex-direction: column;
+    min-width: 100%;
+    max-width: 100%;
+  }
+  
+  .profile form {
+    padding: 20px;
+  }
+
+  .profile input,
+  textarea {
+    min-width: 100%;
+  }
+
+  .profile-pic {
+    max-width: 120px;
+  }
+}
+
+@media (max-width: 480px) {
+  .profile-container {
+    padding: 10px;
+  }
+
+  .profile form {
+    padding: 10px;
+  }
+
+  .profile label img {
+    width: 40px;
+  }
+
+  .profile input,
+  textarea {
+    min-width: 100%;
+  }
 }
