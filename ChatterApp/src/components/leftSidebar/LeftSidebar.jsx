@@ -13,7 +13,7 @@ import {
   where,
   setDoc,
 } from "firebase/firestore";
-import { db } from "../../config/firebase"; // Import Firestore instance
+import { db,logout } from "../../config/firebase"; // Import Firestore instance
 import { AppContext } from "../../context/AppContext";
 import { toast } from "react-toastify";
 
@@ -159,7 +159,7 @@ if(chatData){
             <div className="sub-menu">
               <p onClick={() => navigate("/profile")}>EditProfile</p>
               <hr />
-              <p>Logout</p>
+              <p onClick={logout}>Logout</p>
             </div>
           </div>
         </div>
