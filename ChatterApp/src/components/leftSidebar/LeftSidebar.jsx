@@ -12,6 +12,7 @@ import {
   updateDoc,
   where,
   setDoc,
+  getDocs
 } from "firebase/firestore";
 import { db,logout } from "../../config/firebase"; // Import Firestore instance
 import { AppContext } from "../../context/AppContext";
@@ -41,13 +42,12 @@ const LeftSidebar = () => {
         setShowSearch(true);
         const userRef = collection(db, "users");
         const q = query(userRef, where("userName", "==", input));
-        const querySnap = await getDocs(q);
+        const querySnap = await getDocs(q); // Use getDocs instead of getDoc
 
         if (!querySnap.empty && querySnap.docs[0].data().id !== userData.id) {
-          // console.log(querySnap.docs[0].data());
           let userExist = false;
-          chatData.map(() => {
-            if (user.rId === querySnap.docs[0].data().id) {
+          querySnap.forEach((docSnap) => {
+            if (chatData.some((chat) => chat.rId === docSnap.data().id)) {
               userExist = true;
             }
           });
@@ -65,7 +65,7 @@ const LeftSidebar = () => {
       console.error("Error fetching user:", err);
     }
   };
-
+  
   const addChat = async () => {
     if (!user) return; // Check if user is defined before proceeding
 
@@ -131,20 +131,20 @@ setChatVisbile(true)
       console.log(err);
     }
   };
+  useEffect(() => {
+    const updateChatUserData = async () => {
+      if (chatData && chatUser?.userData) {
+        // Verify chatUser and chatUser.userData exist
+        const useRef = doc(db, "users", chatUser.userData.id);
+        const userSnap = await getDoc(useRef);
+        const userData = userSnap.data();
+        setChatuser((prev) => ({ ...prev, userData }));
+      }
+    };
+    updateChatUserData();
+  }, [chatData]);
 
 
-  useEffect(()=>{
-    const updateChatUserData=async()=>{
-if(chatData){
-  const useRef=doc(db,"users",chatUser.userData.id);
-  const userSnap=await getDoc(useRef);
-  const userData=userSnap.data();
-  setChatuser(prev=>({...prev,userData:userData}))
-}
-    }
-    updateChatUserData()
-
-  },[chatData])
 
   console.log("chatData in LeftSidebar:", chatData);
   return (
